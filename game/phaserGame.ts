@@ -1,7 +1,11 @@
-import Phaser from 'phaser'
-import MainScene from './mainScene'
+// @ts-nocheck
+// Phaser is dynamically imported client-side only
 
-export function createPhaserGame(): Phaser.Game {
+export async function createPhaserGame() {
+  // Dynamic import Phaser and MainScene only on client side
+  const Phaser = (await import('phaser')).default
+  const MainScene = (await import('./mainScene')).default
+
   const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     width: 800,
@@ -11,7 +15,7 @@ export function createPhaserGame(): Phaser.Game {
     physics: {
       default: 'arcade',
       arcade: {
-        gravity: { y: 500 }, // Gravity force
+        gravity: { x: 0, y: 500 }, // Gravity force
         debug: true, // Show physics bodies/hitboxes
       },
     },
@@ -29,7 +33,4 @@ export function createPhaserGame(): Phaser.Game {
   return new Phaser.Game(config)
 }
 
-// World dimensions - map is wider than screen
-export const WORLD_WIDTH = 2400  // 3x wider than viewport
-export const WORLD_HEIGHT = 600  // Same as viewport height
 

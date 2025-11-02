@@ -1,21 +1,38 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { createPhaserGame } from '@/game/phaserGame'
-import type Phaser from 'phaser'
 
 export default function Home() {
   const gameContainerRef = useRef<HTMLDivElement>(null)
-  const gameInstanceRef = useRef<Phaser.Game | null>(null)
+  const gameInstanceRef = useRef<any>(null)
 
   useEffect(() => {
-    if (gameContainerRef.current && !gameInstanceRef.current) {
-      gameInstanceRef.current = createPhaserGame()
+    if (typeof window === 'undefined') return
+    
+    let mounted = true
+
+    const initGame = async () => {
+      if (gameContainerRef.current && !gameInstanceRef.current && mounted) {
+        try {
+          // Dynamically import Phaser only on client side
+          const { createPhaserGame } = await import('@/game/phaserGame')
+          gameInstanceRef.current = await createPhaserGame()
+        } catch (error) {
+          console.error('Failed to load Phaser game:', error)
+        }
+      }
     }
 
+    initGame()
+
     return () => {
+      mounted = false
       if (gameInstanceRef.current) {
-        gameInstanceRef.current.destroy(true)
+        try {
+          gameInstanceRef.current.destroy(true)
+        } catch (error) {
+          console.error('Error destroying game:', error)
+        }
         gameInstanceRef.current = null
       }
     }

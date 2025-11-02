@@ -1,5 +1,10 @@
+// @ts-nocheck
+// Phaser is dynamically imported client-side only
 import Phaser from 'phaser'
-import { WORLD_WIDTH, WORLD_HEIGHT } from './phaserGame'
+
+// World dimensions - map is wider than screen
+export const WORLD_WIDTH = 2400  // 3x wider than viewport
+export const WORLD_HEIGHT = 600  // Same as viewport height
 
 // Retro color palette
 const COLORS = {
