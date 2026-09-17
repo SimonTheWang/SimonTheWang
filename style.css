@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("fonts/PPNeueMontreal-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("fonts/PPNeueMontreal-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Neue Montreal";
+  src: url("fonts/PPNeueMontreal-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  font-family: "Neue Montreal", "PP Neue Montreal", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  color: #000;
+  -webkit-font-smoothing: subpixel-antialiased;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+a {
+  color: #000;
+}
